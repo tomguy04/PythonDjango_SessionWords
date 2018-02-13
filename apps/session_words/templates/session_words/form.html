@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'session_words/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
+    <title>Document</title>
+</head>
+    <body>
+        <form action='/session_words/process' method='post'>
+            {% csrf_token %}
+            <p>Add Word:<input type='text' name='name'></p>
+            <p>Color:<input type="radio" name="color" value="red" checked> Red</p>
+            <p>Color:<input type="radio" name="color" value="green" > green</p>
+            <p>Color:<input type="radio" name="color" value="blue" > blue</p>
+            
+            <!-- <p>Color:<input type='radio' name='green'>Green</p>
+            <p>Color:<input type='radio' name='blue'>Blue</p> -->
+            <input type='submit' value='Submit'>
+        </form>
+        <p>Words:</p>
+        {% for i in request.session.history %}
+            {{i.dictWord}}
+        {%endfor%}
+
+    </body>
+</html>
