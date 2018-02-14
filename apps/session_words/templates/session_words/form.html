@@ -15,7 +15,7 @@
             <p>Color:<input type="radio" name="color" value="red" checked> Red</p>
             <p>Color:<input type="radio" name="color" value="green" > green</p>
             <p>Color:<input type="radio" name="color" value="blue" > blue</p>
-            
+            <input type="checkbox" name="fonts" value="big" >show in big fonts
             <!-- <p>Color:<input type='radio' name='green'>Green</p>
             <p>Color:<input type='radio' name='blue'>Blue</p> -->
             <input type='submit' value='Submit'>
@@ -24,14 +24,27 @@
             {% csrf_token %}
             <input type='submit' value='Clear Session'>
         </form>
+
         <p>Words:</p>
         {% for i in request.session.history %}
-            {% if i.color == 'red' %}
-                <div id = 'red'>{{i.dictWord}} added on {{i.date}}</div>
-            {% elif i.color == 'green' %}
-                <div id = 'green'>{{i.dictWord}} added on {{i.date}}</div>
-            {% else %}
-                <div id = 'blue'>{{i.dictWord}} added on {{i.date}}</div>
+            {% if i.size == 'big' %}
+                <div id = 'bigfont'>
+                {% if i.color == 'red' %}
+                    <div id = 'red'>{{i.dictWord}} added on {{i.date}}</div>
+                {% elif i.color == 'green' %}
+                    <div id = 'green'>{{i.dictWord}} added on {{i.date}}</div>
+                {% else %}
+                    <div id = 'blue'>{{i.dictWord}} added on {{i.date}}</div>
+                {% endif %}
+                </div>
+            {%else%}
+                {% if i.color == 'red' %}
+                    <div id = 'red'>{{i.dictWord}} added on {{i.date}}</div>
+                {% elif i.color == 'green' %}
+                    <div id = 'green'>{{i.dictWord}} added on {{i.date}}</div>
+                {% else %}
+                    <div id = 'blue'>{{i.dictWord}} added on {{i.date}}</div>
+                {% endif %}
             {% endif %}
         {%endfor%}
         

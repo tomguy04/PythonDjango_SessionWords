@@ -20,30 +20,17 @@ def process(request):
     houseDict['dictWord'] = (request.POST['name'])
     houseDict['color'] = (request.POST['color'])
     houseDict['date'] = datetime.now().strftime("%Y/%m/%d at %I:%m:%p")
+    houseDict['size'] = 'small'
+    print  "size " + houseDict['size']
+    if 'fonts' in request.POST:
+        houseDict['size'] = request.POST['fonts']
+    print  "size " + houseDict['size']
+    # if (request.POST['fonts']):
+    #     houseDict['size'] = request.POST['fonts']
+    # houseDict['size'] = 'small'
     request.session['history'].append(houseDict)
 
-    # if 'history' not in request.session.keys():
-    #     request.session['history'] = []
-    # print "this line"        
-    # houseDict['dictWord'] = (request.POST['name'])
-    # request.session['history'].append(request.POST['name'])
-    # print "**********************history->"+str(request.session['history'])
-    # return redirect('/session_words')
-        
-    # if 'history' in request.session.keys():
-    #     houseDict['dictWord'] = (request.POST['name'])
-    #     houseDict['color'] = (request.POST['color'])
-    #     houseDict['date'] = datetime.now().strftime("%Y/%m/%d at %I:%m:%p")
-    #     request.session['history'].append(houseDict)
-    #     print "**********************MOREhistory->"+str(request.session['history'])
-        
-    # else:
-    #     houseDict['dictWord'] = (request.POST['name'])
-    #     houseDict['date'] = datetime.now().strftime("%Y/%m/%d at %I:%m:%p")
-    #     request.session['history'] = []
-    #     request.session['color'] = request.POST['color']
-    #     request.session['history'].append(request.POST['name'])
-    #     print "**********************history->"+str(request.session['history'])
+    
     request.session.modified = True    
     return redirect('/session_words')
 
